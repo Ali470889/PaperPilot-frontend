@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ["nginx", "nodejs_20", "gettext"] # No changes needed here
+
+[staticAssets]
+publish = "dist" # No changes needed here
+
+[start]
+cmd = "envsubst '${PORT}' < /app/nginx-spa.conf > /app/nginx-runtime.conf && nginx -t -c /app/nginx-runtime.conf && nginx -c /app/nginx-runtime.conf -g 'daemon off;'"
