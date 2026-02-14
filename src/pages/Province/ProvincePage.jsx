@@ -9,6 +9,7 @@ import { ErrorState } from "../../components/shared/ErrorState";
 import { LoadingState } from "../../components/shared/LoadingState";
 import { useGetAllProvinces } from '../../hooks/useFetchProvince';
 import { ProvinceDataTable } from "./components/ProvinceDataTable";
+import CreateProvinceDialog from "./components/CreateProvinceDialog";
 
 const ProvincePage = () => {
     const [inputValue, setInputValue] = useState("");
@@ -31,7 +32,8 @@ const ProvincePage = () => {
 
 
     return (
-        <div className="p-6 space-y-6">
+        <>
+            <CreateProvinceDialog />
             {/* Search Section */}
             <div className="flex flex-col md:flex-row gap-3">
                 <Input
@@ -66,7 +68,7 @@ const ProvincePage = () => {
             {/* Table */}
             {!isLoading && <ProvinceDataTable data={data?.provinces} />}
 
-        </div>
+        </>
     )
 }
 
