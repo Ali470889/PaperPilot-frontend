@@ -25,3 +25,39 @@ export const useGetAllBoards = ({ page = 1, size = 10, search = "" }) => {
         retry: false,
     });
 };
+
+
+// API call to create a new education board
+const createBoard = async ({
+  name,
+  acronym,
+  provinceId,
+  city,
+  hasMetric,
+  hasInter,
+}) => {
+  const response = await axiosInstance.post("/board", {
+    name,
+    acronym,
+    provinceId,
+    city,
+    hasMetric,
+    hasInter,
+  });
+
+  return response.data;
+};
+
+// React Query hook (mutation)
+export const useCreateBoard = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: createBoard,
+    retry: false,
+    onSuccess: () => {
+      // adjust this key to whatever you use for boards list
+      queryClient.invalidateQueries({ queryKey: ["boards"] });
+    },
+  });
+};

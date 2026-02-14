@@ -45,11 +45,6 @@ const EditProvinceDialog = ({ data, openProvince, setOpenProvince }) => {
 
     return (
         <Dialog open={openProvince} onOpenChange={setOpenProvince}>
-            {/* If you already open it from outside, you can remove DialogTrigger */}
-            <DialogTrigger asChild>
-                <Button variant="outline">Edit Province</Button>
-            </DialogTrigger>
-
             <DialogContent className="sm:max-w-sm">
                 <DialogHeader>
                     <DialogTitle>Edit Province</DialogTitle>

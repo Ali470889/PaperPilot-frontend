@@ -16,12 +16,13 @@ const getAllProvinces = async ({ page = 1, size = 10, search = null }) => {
 };
 
 // React Query hook
-export const useGetAllProvinces = ({ page = 1, size = 10, search = null }) => {
+export const useGetAllProvinces = ({ page = 1, size = 10, search = null, enable = true }) => {
     return useQuery({
         queryKey: ["provinces", page, size, search],
         queryFn: () => getAllProvinces({ page, size, search }),
         keepPreviousData: true,
         retry: false,
+        enabled: enable,
     });
 };
 
@@ -42,6 +43,30 @@ export const useUpdateProvince = () => {
         mutationFn: updateProvince,
         retry: false,
         onSuccess: (_data, variables) => {
+            queryClient.invalidateQueries({ queryKey: ["provinces"] });
+        },
+    });
+};
+
+
+// API call to create a new province
+const createProvince = async ({ name }) => {
+    const response = await axiosInstance.post(
+        "/province",
+        { name },
+    );
+
+    return response.data;
+};
+
+// React Query hook (mutation)
+export const useCreateProvince = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: createProvince,
+        retry: false,
+        onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["provinces"] });
         },
     });

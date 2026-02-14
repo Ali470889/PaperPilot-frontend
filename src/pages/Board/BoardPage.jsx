@@ -9,6 +9,7 @@ import { LoadingState } from "../../components/shared/LoadingState";
 
 import { useGetAllBoards } from "../../hooks/useFetchBoard";
 import { BoardDataTable } from "./components/BoardDataTable";
+import CreateBoardDialog from "./components/CreateBoardDialog";
 
 const BoardPage = () => {
   const [inputValue, setInputValue] = useState("");
@@ -30,7 +31,8 @@ const BoardPage = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <>
+      <CreateBoardDialog />
       {/* Search Section */}
       <div className="flex flex-col md:flex-row gap-3">
         <Input
@@ -59,7 +61,7 @@ const BoardPage = () => {
 
       {/* Table */}
       {!isLoading && <BoardDataTable data={data?.boards} />}
-    </div>
+    </>
   );
 };
 

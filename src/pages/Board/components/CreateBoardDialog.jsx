@@ -1,0 +1,259 @@
+// import { Button } from "@/components/ui/button"
+// import {
+//     Dialog,
+//     DialogClose,
+//     DialogContent,
+//     DialogDescription,
+//     DialogFooter,
+//     DialogHeader,
+//     DialogTitle,
+//     DialogTrigger,
+// } from "@/components/ui/dialog"
+
+
+// const CreateBoardDialog = () => {
+
+//     const { mutate: createBoardMutate, isPending } = useCreateBoard();
+
+//     const handleSubmit = () => {
+//         createBoardMutate({
+//             name: "Lahore Board",
+//             acronym: "BISE Lahore",
+//             provinceId: 1,
+//             city: "Lahore",
+//             hasMetric: true,
+//             hasInter: true,
+//         });
+//     }
+//     return (
+//         <Dialog>
+//             <DialogTrigger asChild>
+//                 <Button variant="outline">Open Dialog</Button>
+//             </DialogTrigger>
+//             <DialogContent className="sm:max-w-sm">
+//                 <DialogHeader>
+//                     <DialogTitle>Edit profile</DialogTitle>
+//                     <DialogDescription>
+//                         Make changes to your profile here. Click save when you&apos;re
+//                         done.
+//                     </DialogDescription>
+//                 </DialogHeader>
+
+
+
+//                 <DialogFooter>
+//                     <DialogClose asChild>
+//                         <Button variant="outline">Cancel</Button>
+//                     </DialogClose>
+//                     <Button
+//                         onClick={handleSubmit}
+//                         disabled={isPending}
+//                     >
+//                         Save
+//                     </Button>
+//                 </DialogFooter>
+//             </DialogContent>
+//         </Dialog>
+//     )
+// }
+
+// export default CreateBoardDialog
+
+
+
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import { useGetAllProvinces } from "../../../hooks/useFetchProvince";
+import { useCreateBoard } from "../../../hooks/useFetchBoard";
+import { Plus } from "lucide-react";
+
+const CreateBoardDialog = () => {
+
+    const [form, setForm] = useState({
+        name: "",
+        acronym: "",
+        provinceId: "",
+        city: "",
+        hasMetric: true,
+        hasInter: true,
+    });
+
+    const [open, setOpen] = useState(false)
+
+    const { mutate: createBoardMutate, isPending } = useCreateBoard();
+
+    const {
+        data: provinces,
+        isLoading: isLoadingProvinces,
+        isError: isErrorProvinces
+    } = useGetAllProvinces({
+        page: 1,
+        size: 10,
+        enable: open,
+    });
+
+
+
+    const onChange = (key) => (e) => {
+        setForm((prev) => ({ ...prev, [key]: e.target.value }));
+    };
+
+    const onCheck = (key) => (checked) => {
+        setForm((prev) => ({ ...prev, [key]: !!checked }));
+    };
+
+    const handleSubmit = () => {
+        createBoardMutate({
+            name: form.name,
+            acronym: form.acronym,
+            provinceId: Number(form.provinceId),
+            city: form.city,
+            hasMetric: form.hasMetric,
+            hasInter: form.hasInter,
+        });
+    };
+
+    return (
+        <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>
+                <Button className="self-end"> <Plus />Create Board</Button>
+            </DialogTrigger>
+
+            <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                    <DialogTitle>Create Education Board</DialogTitle>
+                    <DialogDescription>
+                        Fill in the details below and click save to create a new board.
+                    </DialogDescription>
+                </DialogHeader>
+
+                <div className="grid gap-4 py-2">
+                    <div className="grid gap-2">
+                        <Label htmlFor="name">Board Name</Label>
+                        <Input
+                            id="name"
+                            placeholder="e.g. Lahore Board"
+                            value={form.name}
+                            onChange={onChange("name")}
+                        />
+                    </div>
+
+                    <div className="grid gap-2">
+                        <Label htmlFor="acronym">Acronym</Label>
+                        <Input
+                            id="acronym"
+                            placeholder="e.g. BISE Lahore"
+                            value={form.acronym}
+                            onChange={onChange("acronym")}
+                        />
+                    </div>
+                    <div className="grid gap-2">
+                        <Label>Province</Label>
+
+                        <Select
+                            value={form.provinceId}
+                            onValueChange={(value) =>
+                                setForm((prev) => ({ ...prev, provinceId: value }))
+                            }
+                        >
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select a province" />
+                            </SelectTrigger>
+
+                            <SelectContent>
+                                {isLoadingProvinces && (
+                                    <SelectItem value="loading" disabled>
+                                        Loading...
+                                    </SelectItem>
+                                )}
+
+                                {isErrorProvinces && (
+                                    <SelectItem value="error" disabled>
+                                        Failed to load provinces
+                                    </SelectItem>
+                                )}
+
+                                {provinces.provinces.map((province) => (
+                                    <SelectItem
+                                        key={province.id}
+                                        value={String(province.id)}
+                                    >
+                                        {province.name}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+
+                    <div className="grid gap-2">
+                        <Label htmlFor="city">City</Label>
+                        <Input
+                            id="city"
+                            placeholder="e.g. Lahore"
+                            value={form.city}
+                            onChange={onChange("city")}
+                        />
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                        <Checkbox
+                            id="hasMetric"
+                            checked={form.hasMetric}
+                            onCheckedChange={onCheck("hasMetric")}
+                        />
+                        <Label htmlFor="hasMetric" className="cursor-pointer">
+                            Has Metric
+                        </Label>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                        <Checkbox
+                            id="hasInter"
+                            checked={form.hasInter}
+                            onCheckedChange={onCheck("hasInter")}
+                        />
+                        <Label htmlFor="hasInter" className="cursor-pointer">
+                            Has Inter
+                        </Label>
+                    </div>
+                </div>
+
+                <DialogFooter>
+                    <DialogClose asChild>
+                        <Button variant="outline" disabled={isPending}>
+                            Cancel
+                        </Button>
+                    </DialogClose>
+
+                    <Button onClick={handleSubmit} disabled={isPending}>
+                        {isPending ? "Saving..." : "Save"}
+                    </Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+    );
+};
+
+export default CreateBoardDialog;
