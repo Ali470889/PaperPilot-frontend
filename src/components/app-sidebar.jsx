@@ -23,7 +23,7 @@ import { PERMISSIONS } from '../routes/PERMISSIONS';
 
 export function AppSidebar({ ...props }) {
   const decoded = getTokenFromStorage();
-  const userRole = decoded?.roles || [];
+  const userRole = decoded?.role
 
   const filteredProjects = ADMIN_PAGES.filter((item) => PERMISSIONS[userRole]?.includes(item.route));
 
