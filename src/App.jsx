@@ -227,6 +227,8 @@ import Unauthorized from './pages/general/unauthorized/Unauthorized'
 import AuthProvider from './auth/AuthContext'
 import ProtectedRoute from './auth/ProtectedRoute'
 import AppLayout from './layout/AppLayout'
+import BoardPage from './pages/Board/BoardPage'
+import ProvincePage from './pages/Province/ProvincePage'
 
 function App() {
   return (
@@ -243,7 +245,22 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* باقی routes کے لیے وہی structure استعمال کریں */}
+            <Route
+              path={ADMIN_ROUTES.PROVINCE}
+              element={
+                <ProtectedRoute pageUrl={ADMIN_ROUTES.PROVINCE}>
+                  <ProvincePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={ADMIN_ROUTES.BOARD}
+              element={
+                <ProtectedRoute pageUrl={ADMIN_ROUTES.BOARD}>
+                  <BoardPage />
+                </ProtectedRoute>
+              }
+            />
             <Route path={ADMIN_ROUTES.UNAUTHORIZED} element={<Unauthorized />} />
             <Route path="*" element={<NotFound />} />
           </Route>

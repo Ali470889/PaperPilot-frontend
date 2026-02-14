@@ -17,12 +17,12 @@ const ProtectedRoute = ({ children, pageUrl }) => {
         if (isExpired) return <Navigate to={ADMIN_ROUTES.LOGIN} replace />
 
         // Extract roles safely
-        const userRoles = decoded?.role
+        const userRole = decoded?.role
 
-        const hasAccess = PERMISSIONS[userRoles].includes(pageUrl)
+        const hasAccess = PERMISSIONS[userRole].includes(pageUrl)
 
         if (!hasAccess) {
-            toast.error('This user Role is not allowed  ')
+            toast.error('This user Role is not allowed')
             return <Navigate to={ADMIN_ROUTES.UNAUTHORIZED} replace />
         }
 

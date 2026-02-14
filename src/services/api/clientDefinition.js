@@ -131,7 +131,7 @@ class Http {
   async _getAuthHeader() {
     if (!this.tokenStore?.get) return {};
     const tok = await this.tokenStore.get();
-    return tok ? { Authorization: `Bearer ${tok}` } : {};
+    return tok ? { Authorization: `${tok}` } : {};
   }
 
   async _runRequestInterceptors(ctx) {

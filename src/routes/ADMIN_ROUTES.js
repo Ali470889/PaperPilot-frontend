@@ -1,62 +1,28 @@
 import {
     BadgeQuestionMark,
     BookOpenText,
-    ChartBarStacked,
-    Clipboard,
-    CreditCard,
     FileText,
     GraduationCap,
-    Group,
-    Handshake,
-    Layers,
-    Megaphone,
-    MessageCircleQuestionMark,
-    NotebookText,
-    SendToBack,
-    ShieldUser,
-    ShoppingCart,
-    StickyNote,
-    TrainTrack,
-    User,
-    Video,
-    Workflow
+    LayoutDashboard,
+    SquareDashedTopSolid,
+    LandPlot,
 } from "lucide-react";
 
 export const ADMIN_PAGES = [
     {
-        name: "Course",
-        icon: NotebookText,
-        route: "/course",
+        name: "Province",
+        icon: LandPlot,
+        route: "/province",
     },
     {
-        name: "Quiz",
-        icon: MessageCircleQuestionMark,
-        route: "/quiz",
-    },
-    {
-        name: "Section",
-        icon: Workflow,
-        route: "/section",
-    },
-    {
-        name: "Video",
-        icon: Video,
-        route: "/video",
-    },
-    {
-        name: "Reading",
-        icon: StickyNote,
-        route: "/reading",
+        name: "Board",
+        icon: SquareDashedTopSolid,
+        route: "/board",
     },
     {
         name: "Question",
         icon: BadgeQuestionMark,
         route: "/question",
-    },
-    {
-        name: "Flashcard",
-        icon: Clipboard,
-        route: "/flashcard",
     },
     {
         name: "Subject",
@@ -69,44 +35,9 @@ export const ADMIN_PAGES = [
         route: "/chapter",
     },
     {
-        name: "Bundle",
-        icon: Layers,
-        route: "/bundle",
-    },
-    {
-        name: "Batch",
-        icon: ShieldUser,
-        route: "/batch",
-    },
-    {
         name: "Topic",
         icon: FileText,
         route: "/topic",
-    },
-    {
-        name: "Advertisement",
-        icon: Megaphone,
-        route: "/advertisement",
-    },
-    {
-        name: "Shop purchase",
-        icon: CreditCard,
-        route: "/shop-purchase",
-    },
-    {
-        name: "Installment",
-        icon: SendToBack,
-        route: "/installment",
-    },
-    {
-        name: "Purchase Track",
-        icon: TrainTrack,
-        route: "/purchase-track",
-    },
-    {
-        name: "Student",
-        icon: User,
-        route: "/student",
     },
     {
         name: "Login",
@@ -115,7 +46,7 @@ export const ADMIN_PAGES = [
     },
     {
         name: "Dashboard",
-        icon: null,
+        icon: LayoutDashboard,
         route: "/dashboard",
     },
     {
@@ -123,29 +54,10 @@ export const ADMIN_PAGES = [
         icon: null,
         route: "/unauthorized",
     },
-    {
-        name: "PRM Dashboard",
-        icon: Handshake,
-        route: "/prm-dashboard",
-    },
-    {
-        name: "Shop Product",
-        icon: ShoppingCart,
-        route: "/shop-product",
-    },
-    {
-        name: "Shop plan",
-        icon: Group,
-        route: "/shop-plan",
-    },
-    {
-        name: "Category",
-        icon: ChartBarStacked,
-        route: "/category",
-    },
+
 ];
 
-{/* <ChartBarStacked /> */}
+{/* <ChartBarStacked /> */ }
 
 export const ADMIN_ROUTES = ADMIN_PAGES.reduce((acc, page) => {
     const key = page.name
