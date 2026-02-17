@@ -42,7 +42,6 @@ export const columns = [
             const data = row.original;
 
             const [openBoard, setOpenBoard] = React.useState(false);
-            const [openAddTopic, setOpenAddTopic] = React.useState(false);
 
             return (
                 <>
@@ -90,23 +89,13 @@ export const columns = [
     },
     {
         accessorKey: "name",
-        header: () => <div className="">Board Name</div>,
+        header: () => <div className="">Name</div>,
         cell: ({ row }) => <div className="">{row.getValue("name")}</div>,
     },
     {
         accessorKey: "acronym",
         header: () => <div className="">Acronym</div>,
         cell: ({ row }) => <div className="">{row.getValue("acronym")}</div>,
-    },
-    {
-        accessorKey: "city",
-        header: () => <div className="">City</div>,
-        cell: ({ row }) => <div className="">{row.getValue("city")}</div>,
-    },
-    {
-        accessorKey: "name",
-        header: () => <div className="">Board Name</div>,
-        cell: ({ row }) => <div className="">{row.getValue("name")}</div>,
     },
     {
         accessorKey: "updatedAt",

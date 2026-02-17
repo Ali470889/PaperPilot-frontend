@@ -37,6 +37,7 @@ const CreateProvinceDialog = () => {
       { name },
       {
         onSuccess: () => {
+          setName("")
           setOpenProvince(false);
         },
       }
