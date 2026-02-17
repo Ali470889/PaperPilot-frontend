@@ -2,7 +2,6 @@ import { accessStore, refreshStore } from "../tokenStore/localStorage";
 
 export async function refreshAccessToken() {
   const refreshToken = await refreshStore.get();
-  console.log("refreshToken", refreshToken);
 
   if (!refreshToken) throw new Error("No refreshToken available");
 

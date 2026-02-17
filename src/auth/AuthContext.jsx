@@ -22,7 +22,6 @@ const AuthContext = ({ children }) => {
         try {
 
             const decoded = jwtDecode(token.refreshToken)
-            console.log("decoded", decoded);
 
             const isExpired = decoded.exp * 1000 < Date.now()
 
