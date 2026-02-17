@@ -79,7 +79,6 @@ export const columns = [
                             setOpenBoard={setOpenBoard}
                         />
                     )}
-                    {/* {openAddTopic && <AddTopicDialog data={data} openAddTopic={openAddTopic} setOpenAddTopic={setOpenAddTopic} />} */}
                 </>
             );
         },
@@ -88,6 +87,21 @@ export const columns = [
         accessorKey: "id",
         header: "Id",
         cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
+    },
+    {
+        accessorKey: "name",
+        header: () => <div className="">Board Name</div>,
+        cell: ({ row }) => <div className="">{row.getValue("name")}</div>,
+    },
+    {
+        accessorKey: "acronym",
+        header: () => <div className="">Acronym</div>,
+        cell: ({ row }) => <div className="">{row.getValue("acronym")}</div>,
+    },
+    {
+        accessorKey: "city",
+        header: () => <div className="">City</div>,
+        cell: ({ row }) => <div className="">{row.getValue("city")}</div>,
     },
     {
         accessorKey: "name",

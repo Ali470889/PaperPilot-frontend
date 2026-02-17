@@ -5,25 +5,25 @@ import { axiosInstance } from "@/services/api/axiosInstance";
 
 // API call to get all boards
 const getAllBoards = async ({ page = 1, size = 10, search = "" }) => {
-    const response = await axiosInstance.get("/board", {
-        params: {
-            page,
-            size,
-            search
-        },
-    });
+  const response = await axiosInstance.get("/board", {
+    params: {
+      page,
+      size,
+      search
+    },
+  });
 
-    return response.data;
+  return response.data;
 };
 
 // React Query hook
 export const useGetAllBoards = ({ page = 1, size = 10, search = "" }) => {
-    return useQuery({
-        queryKey: ["boards", page, size, search],
-        queryFn: () => getAllBoards({ page, size, search }),
-        keepPreviousData: true,
-        retry: false,
-    });
+  return useQuery({
+    queryKey: ["boards", page, size, search],
+    queryFn: () => getAllBoards({ page, size, search }),
+    keepPreviousData: true,
+    retry: false,
+  });
 };
 
 
@@ -56,7 +56,42 @@ export const useCreateBoard = () => {
     mutationFn: createBoard,
     retry: false,
     onSuccess: () => {
-      // adjust this key to whatever you use for boards list
+      queryClient.invalidateQueries({ queryKey: ["boards"] });
+    },
+  });
+};
+
+
+// API call to fully update an education board
+const updateBoard = async ({
+  id,
+  name,
+  acronym,
+  provinceId,
+  city,
+  hasMetric,
+  hasInter,
+}) => {
+  const response = await axiosInstance.put(`/board/${id}`, {
+    name,
+    acronym,
+    provinceId,
+    city,
+    hasMetric,
+    hasInter,
+  });
+
+  return response.data;
+};
+
+// React Query hook (mutation)
+export const useUpdateBoard = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: updateBoard,
+    retry: false,
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["boards"] });
     },
   });

@@ -1,68 +1,4 @@
-// import { Button } from "@/components/ui/button"
-// import {
-//     Dialog,
-//     DialogClose,
-//     DialogContent,
-//     DialogDescription,
-//     DialogFooter,
-//     DialogHeader,
-//     DialogTitle,
-//     DialogTrigger,
-// } from "@/components/ui/dialog"
-
-
-// const CreateBoardDialog = () => {
-
-//     const { mutate: createBoardMutate, isPending } = useCreateBoard();
-
-//     const handleSubmit = () => {
-//         createBoardMutate({
-//             name: "Lahore Board",
-//             acronym: "BISE Lahore",
-//             provinceId: 1,
-//             city: "Lahore",
-//             hasMetric: true,
-//             hasInter: true,
-//         });
-//     }
-//     return (
-//         <Dialog>
-//             <DialogTrigger asChild>
-//                 <Button variant="outline">Open Dialog</Button>
-//             </DialogTrigger>
-//             <DialogContent className="sm:max-w-sm">
-//                 <DialogHeader>
-//                     <DialogTitle>Edit profile</DialogTitle>
-//                     <DialogDescription>
-//                         Make changes to your profile here. Click save when you&apos;re
-//                         done.
-//                     </DialogDescription>
-//                 </DialogHeader>
-
-
-
-//                 <DialogFooter>
-//                     <DialogClose asChild>
-//                         <Button variant="outline">Cancel</Button>
-//                     </DialogClose>
-//                     <Button
-//                         onClick={handleSubmit}
-//                         disabled={isPending}
-//                     >
-//                         Save
-//                     </Button>
-//                 </DialogFooter>
-//             </DialogContent>
-//         </Dialog>
-//     )
-// }
-
-// export default CreateBoardDialog
-
-
-
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
     Dialog,
     DialogClose,
@@ -73,6 +9,8 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
     Select,
     SelectContent,
@@ -80,13 +18,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import { useGetAllProvinces } from "../../../hooks/useFetchProvince";
-import { useCreateBoard } from "../../../hooks/useFetchBoard";
+import { Switch } from "@/components/ui/switch";
 import { Plus } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { useCreateBoard } from "../../../hooks/useFetchBoard";
+import { useGetAllProvinces } from "../../../hooks/useFetchProvince";
 
 const CreateBoardDialog = () => {
 
@@ -113,8 +50,6 @@ const CreateBoardDialog = () => {
         enable: open,
     });
 
-
-
     const onChange = (key) => (e) => {
         setForm((prev) => ({ ...prev, [key]: e.target.value }));
     };
@@ -131,6 +66,19 @@ const CreateBoardDialog = () => {
             city: form.city,
             hasMetric: form.hasMetric,
             hasInter: form.hasInter,
+        }, {
+            onSuccess: () => {
+                setOpen(false);
+                setForm({
+                    name: "",
+                    acronym: "",
+                    provinceId: "",
+                    city: "",
+                    hasMetric: true,
+                    hasInter: true,
+                });
+                toast.success("Board created successfully");
+            }
         });
     };
 
@@ -194,7 +142,7 @@ const CreateBoardDialog = () => {
                                     </SelectItem>
                                 )}
 
-                                {provinces.provinces.map((province) => (
+                                {provinces?.provinces?.map((province) => (
                                     <SelectItem
                                         key={province.id}
                                         value={String(province.id)}
@@ -218,7 +166,7 @@ const CreateBoardDialog = () => {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <Checkbox
+                        <Switch
                             id="hasMetric"
                             checked={form.hasMetric}
                             onCheckedChange={onCheck("hasMetric")}
@@ -229,7 +177,7 @@ const CreateBoardDialog = () => {
                     </div>
 
                     <div className="flex items-center gap-3">
-                        <Checkbox
+                        <Switch
                             id="hasInter"
                             checked={form.hasInter}
                             onCheckedChange={onCheck("hasInter")}
@@ -238,6 +186,7 @@ const CreateBoardDialog = () => {
                             Has Inter
                         </Label>
                     </div>
+
                 </div>
 
                 <DialogFooter>
