@@ -71,7 +71,7 @@ const PublisherPage = () => {
             {/* Data Table */}
             {!isLoading && !isError && (
                 <PublisherDataTable
-                    data={data?.publishers}          // array of publishers
+                    data={data?.items}          // array of publishers
                 />
             )}
         </>

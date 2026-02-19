@@ -15,12 +15,13 @@ const getAllSubjects = async ({ page = 1, size = 10, search = "" }) => {
     return response.data;
 };
 
-export const useGetAllSubjects = ({ page = 1, size = 10, search = "" }) => {
+export const useGetAllSubjects = ({ page = 1, size = 10, search = "", enable = true }) => {
     return useQuery({
         queryKey: ["subjects", page, size, search],
         queryFn: () => getAllSubjects({ page, size, search }),
         keepPreviousData: true,
         retry: false,
+        enable: enable
     });
 };
 

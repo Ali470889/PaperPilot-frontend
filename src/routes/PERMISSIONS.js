@@ -16,6 +16,7 @@ export const PERMISSIONS = {
         "/subject",
         "/chapter",
         "/publisher",
+        "/book",
         "/topic",
     ],
 

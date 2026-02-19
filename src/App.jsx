@@ -21,8 +21,9 @@ import AppLayout from './layout/AppLayout'
 import BoardPage from './pages/board/BoardPage'
 import ProvincePage from './pages/province/ProvincePage'
 import ClassPage from './pages/class/ClassPage'
-import SubjectPage from './pages/Subject/SubjectPage'
+import SubjectPage from './pages/subject/SubjectPage'
 import PublisherPage from './pages/publisher/PublisherPage'
+import BookPage from './pages/book/BookPage'
 
 function App() {
   return (
@@ -76,6 +77,14 @@ function App() {
               element={
                 <ProtectedRoute pageUrl={ADMIN_ROUTES.PUBLISHER}>
                   <PublisherPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={ADMIN_ROUTES.BOOK}
+              element={
+                <ProtectedRoute pageUrl={ADMIN_ROUTES.BOOK}>
+                  <BookPage />
                 </ProtectedRoute>
               }
             />
