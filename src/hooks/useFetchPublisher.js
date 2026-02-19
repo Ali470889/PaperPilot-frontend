@@ -30,12 +30,13 @@ const getAllPublishers = async ({ page = 1, size = 10, search = "" }) => {
     return response.data;
 };
 
-export const useGetAllPublishers = ({ page = 1, size = 10, search = "" }) => {
+export const useGetAllPublishers = ({ page = 1, size = 10, search = "", enable }) => {
     return useQuery({
         queryKey: ["publishers", page, size, search],
         queryFn: () => getAllPublishers({ page, size, search }),
         keepPreviousData: true, // keeps old data while fetching new
         retry: false,           // prevents automatic retries
+        enable: enable
     });
 };
 

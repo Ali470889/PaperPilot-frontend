@@ -8,6 +8,8 @@ import {
     LandPlot,
     Shapes,
     BookCheck,
+    Book,
+
 } from "lucide-react";
 
 export const ADMIN_PAGES = [
@@ -40,6 +42,11 @@ export const ADMIN_PAGES = [
         name: "Publisher",
         icon: BookCheck,
         route: "/publisher",
+    },
+    {
+        name: "Book",
+        icon: Book,
+        route: "/book",
     },
     {
         name: "Chapter",

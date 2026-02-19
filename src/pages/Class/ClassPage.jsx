@@ -68,7 +68,7 @@ const ClassPage = () => {
             {/* Table */}
             {!isLoading && !isError && (
                 <ClassDataTable
-                    data={data?.classes}
+                    data={data?.items}
                     total={data?.total}
                     page={data?.page}
                     totalPages={data?.totalPages}
