@@ -26,14 +26,14 @@ export const ADMIN_PAGES = [
         route: "/question",
     },
     {
-        name: "Subject",
-        icon: GraduationCap,
-        route: "/subject",
-    },
-    {
         name: "Class",
         icon: Shapes,
         route: "/class",
+    },
+    {
+        name: "Subject",
+        icon: GraduationCap,
+        route: "/subject",
     },
     {
         name: "Chapter",

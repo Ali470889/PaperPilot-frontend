@@ -18,9 +18,10 @@ import Unauthorized from './pages/general/unauthorized/Unauthorized'
 import AuthProvider from './auth/AuthContext'
 import ProtectedRoute from './auth/ProtectedRoute'
 import AppLayout from './layout/AppLayout'
-import BoardPage from './pages/Board/BoardPage'
-import ProvincePage from './pages/Province/ProvincePage'
-import ClassPage from './pages/Class/ClassPage'
+import BoardPage from './pages/board/BoardPage'
+import ProvincePage from './pages/province/ProvincePage'
+import ClassPage from './pages/class/ClassPage'
+import SubjectPage from './pages/Subject/SubjectPage'
 
 function App() {
   return (
@@ -58,6 +59,14 @@ function App() {
               element={
                 <ProtectedRoute pageUrl={ADMIN_ROUTES.CLASS}>
                   <ClassPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={ADMIN_ROUTES.SUBJECT}
+              element={
+                <ProtectedRoute pageUrl={ADMIN_ROUTES.SUBJECT}>
+                  <SubjectPage />
                 </ProtectedRoute>
               }
             />
