@@ -22,6 +22,7 @@ import BoardPage from './pages/board/BoardPage'
 import ProvincePage from './pages/province/ProvincePage'
 import ClassPage from './pages/class/ClassPage'
 import SubjectPage from './pages/Subject/SubjectPage'
+import PublisherPage from './pages/publisher/PublisherPage'
 
 function App() {
   return (
@@ -67,6 +68,14 @@ function App() {
               element={
                 <ProtectedRoute pageUrl={ADMIN_ROUTES.SUBJECT}>
                   <SubjectPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={ADMIN_ROUTES.PUBLISHER}
+              element={
+                <ProtectedRoute pageUrl={ADMIN_ROUTES.PUBLISHER}>
+                  <PublisherPage />
                 </ProtectedRoute>
               }
             />
