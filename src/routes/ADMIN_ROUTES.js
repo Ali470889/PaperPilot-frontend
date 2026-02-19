@@ -6,6 +6,7 @@ import {
     LayoutDashboard,
     SquareDashedTopSolid,
     LandPlot,
+    Shapes,
 } from "lucide-react";
 
 export const ADMIN_PAGES = [
@@ -28,6 +29,11 @@ export const ADMIN_PAGES = [
         name: "Subject",
         icon: GraduationCap,
         route: "/subject",
+    },
+    {
+        name: "Class",
+        icon: Shapes,
+        route: "/class",
     },
     {
         name: "Chapter",
