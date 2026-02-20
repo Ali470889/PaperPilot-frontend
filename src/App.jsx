@@ -25,6 +25,7 @@ import SubjectPage from './pages/subject/SubjectPage'
 import PublisherPage from './pages/publisher/PublisherPage'
 import BookPage from './pages/book/BookPage'
 import ChapterPage from './pages/chapter/ChapterPage'
+import TopicPage from './pages/topic/TopicPage'
 
 function App() {
   return (
@@ -94,6 +95,14 @@ function App() {
               element={
                 <ProtectedRoute pageUrl={ADMIN_ROUTES.CHAPTER}>
                   <ChapterPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={ADMIN_ROUTES.TOPIC}
+              element={
+                <ProtectedRoute pageUrl={ADMIN_ROUTES.TOPIC}>
+                  <TopicPage />
                 </ProtectedRoute>
               }
             />
