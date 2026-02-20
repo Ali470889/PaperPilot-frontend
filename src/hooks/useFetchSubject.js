@@ -21,7 +21,7 @@ export const useGetAllSubjects = ({ page = 1, size = 10, search = "", enable = t
         queryFn: () => getAllSubjects({ page, size, search }),
         keepPreviousData: true,
         retry: false,
-        enable: enable
+        enabled: enable
     });
 };
 

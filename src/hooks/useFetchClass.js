@@ -21,7 +21,7 @@ export const useGetAllClasses = ({ page = 1, size = 10, search = "", enable }) =
         queryFn: () => getAllClasses({ page, size, search }),
         keepPreviousData: true,
         retry: false,
-        enable: enable
+        enabled: enable
     });
 };
 
