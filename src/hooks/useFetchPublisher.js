@@ -36,7 +36,7 @@ export const useGetAllPublishers = ({ page = 1, size = 10, search = "", enable }
         queryFn: () => getAllPublishers({ page, size, search }),
         keepPreviousData: true, // keeps old data while fetching new
         retry: false,           // prevents automatic retries
-        enable: enable
+        enabled: enable
     });
 };
 

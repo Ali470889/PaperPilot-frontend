@@ -70,12 +70,6 @@ const EditBookDialog = ({ data, openBook, setOpenBook }) => {
 
     return (
         <Dialog open={openBook} onOpenChange={setOpenBook}>
-            <DialogTrigger asChild>
-                <Button variant="outline" size="sm">
-                    <Edit className="mr-2 h-4 w-4" /> Edit
-                </Button>
-            </DialogTrigger>
-
             <DialogContent className="sm:max-w-sm">
                 <DialogHeader>
                     <DialogTitle>Update Book</DialogTitle>
