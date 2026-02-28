@@ -54,7 +54,7 @@ const BookPage = () => {
             <CreateBookDialog />
 
             {/* Search Section */}
-            <div className="flex flex-col md:flex-row gap-3 my-4">
+            <div className="flex flex-col md:flex-row gap-3">
                 <Input
                     placeholder="Search books..."
                     value={inputValue}
