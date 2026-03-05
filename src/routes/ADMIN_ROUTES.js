@@ -90,7 +90,7 @@ export const ADMIN_PAGES = [
         name: "Paper Generate",
         icon: null,
         route: "/paper-generate",
-        sidebar: false
+        sidebar: true
     },
     {
         name: "Select Publisher",
@@ -98,11 +98,24 @@ export const ADMIN_PAGES = [
         route: "/paper-generate/select-publisher",
         sidebar: false
     },
+    {
+        name: "Select Class",
+        icon: null,
+        route: "/paper-generate/select-publisher/:publisherId/select-class",
+        sidebar: false
+    },
+    {
+        name: "Select Subject",
+        icon: null,
+        route: "/paper-generate/select-publisher/:publisherId/select-class/:classId/select-subject",
+        sidebar: false
+    },
 ];
 
 
 export const ADMIN_ROUTE_BUILDERS = {
-    selectPublisherById: (publisherId) => `/paper-generate/select-publisher/${publisherId}`,
+    selectClassByPublisherId: (publisherId) => `/paper-generate/select-publisher/${publisherId}/select-class`,
+    selectSubjectByClassId: (classId) => `/paper-generate/select-publisher/:publisherId/select-class/${classId}/select-subject`,
 };
 
 {/* <ChartBarStacked /> */ }

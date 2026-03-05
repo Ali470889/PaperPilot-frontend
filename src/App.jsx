@@ -29,6 +29,8 @@ import TopicPage from './pages/topic/TopicPage'
 import PaperGeneratePage from './pages/PaperGenerate/PaperGeneratePage'
 import SelectPublisher from './pages/PaperGenerate/publisher/SelectPublisher'
 import PaperLayout from './pages/PaperGenerate/PaperLayout'
+import SelectClass from './pages/PaperGenerate/class/SelectClass'
+import SelectSubject from './pages/PaperGenerate/subject/SelectSubject'
 
 function App() {
   return (
@@ -120,6 +122,23 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route
+                path={ADMIN_ROUTES.SELECT_CLASS}
+                element={
+                  <ProtectedRoute pageUrl={ADMIN_ROUTES.SELECT_CLASS}>
+                    <SelectClass />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ADMIN_ROUTES.SELECT_SUBJECT}
+                element={
+                  <ProtectedRoute pageUrl={ADMIN_ROUTES.SELECT_SUBJECT}>
+                    <SelectSubject />
+                  </ProtectedRoute>
+                }
+              />
+
             </Route>
             <Route path={ADMIN_ROUTES.UNAUTHORIZED} element={<Unauthorized />} />
             <Route path="*" element={<NotFound />} />
