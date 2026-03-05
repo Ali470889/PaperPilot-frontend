@@ -1,6 +1,7 @@
 // permissions.js
 export const ROLES = {
     ADMIN: "superAdmin",
+    USER: "user",
     FINANCE_ADMIN: "finance_admin",
     STUDENT_ADMIN: "student_admin",
     PRM_ADMIN: "prm_admin",
@@ -18,6 +19,13 @@ export const PERMISSIONS = {
         "/publisher",
         "/book",
         "/topic",
+        "/paper-generate",
+        "/paper-generate/select-publisher",
+    ],
+
+    [ROLES.USER]: [
+        "/paper-generate",
+        "/paper-generate/select-publisher",
     ],
 
     // [ROLES.CONTENT_ADMIN]: [

@@ -26,6 +26,9 @@ import PublisherPage from './pages/publisher/PublisherPage'
 import BookPage from './pages/book/BookPage'
 import ChapterPage from './pages/chapter/ChapterPage'
 import TopicPage from './pages/topic/TopicPage'
+import PaperGeneratePage from './pages/PaperGenerate/PaperGeneratePage'
+import SelectPublisher from './pages/PaperGenerate/publisher/SelectPublisher'
+import PaperLayout from './pages/PaperGenerate/PaperLayout'
 
 function App() {
   return (
@@ -106,6 +109,18 @@ function App() {
                 </ProtectedRoute>
               }
             />
+
+            <Route path={ADMIN_ROUTES.PAPER_GENERATE} element={<PaperLayout />}>
+              <Route index element={<PaperGeneratePage />} />
+              <Route
+                path={ADMIN_ROUTES.SELECT_PUBLISHER}
+                element={
+                  <ProtectedRoute pageUrl={ADMIN_ROUTES.SELECT_PUBLISHER}>
+                    <SelectPublisher />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
             <Route path={ADMIN_ROUTES.UNAUTHORIZED} element={<Unauthorized />} />
             <Route path="*" element={<NotFound />} />
           </Route>

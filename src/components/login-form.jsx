@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { sound } from "../lib/sound";
-import ADMIN_ROUTES from "../routes/ADMIN_ROUTES";
+import { PERMISSIONS } from "../routes/PERMISSIONS";
 import { getFromStorage } from "../services/tokenStore/storageHelper";
 
 export function LoginForm({ className, ...props }) {
@@ -38,20 +38,24 @@ export function LoginForm({ className, ...props }) {
       return;
     }
 
-
     try {
-      const res = await login(formData); // assume it stores token internally
-      // sound.success();
+      await login(formData);
       toast.success("Login Successful!");
 
-      const token = getFromStorage(); // or from res if returned
+      const token = getFromStorage();
+      const decoded = jwtDecode(token.refreshToken);
+      const role = decoded?.role;
 
-      // Navigate based on role priority or match 
-      navigate(ADMIN_ROUTES.DASHBOARD);
-
+      const firstAllowedRoute = PERMISSIONS?.[role]?.[0];
+      navigate(firstAllowedRoute);
     } catch (error) {
       sound.error();
-      toast.error(JSON.parse(error.message).detail);
+
+      toast.error(
+        error?.message && error.message.startsWith("{")
+          ? JSON.parse(error.message).detail
+          : "Login failed"
+      );
     } finally {
       setPending(false);
     }
