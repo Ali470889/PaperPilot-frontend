@@ -78,3 +78,23 @@ export const useUpdateClass = () => {
         },
     });
 };
+
+
+const getClassesByPublisher = async ({ publisherId, search }) => {
+    const response = await axiosInstance.get(`/class/${publisherId}/classes`, {
+        params: {
+            search,
+        },
+    });
+    return response.data;
+};
+
+
+export const useGetClassesByPublisher = ({ publisherId, search }, enable = true) => {
+    return useQuery({
+        queryKey: ["publisher-classes", publisherId, search],
+        queryFn: () => getClassesByPublisher({ publisherId, search }),
+        enabled: enable && !!publisherId,
+        retry: false
+    });
+};

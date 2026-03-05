@@ -103,7 +103,7 @@ const CreateBookDialog = () => {
                         <AsyncSearchBox
                             placeholder="Select Subject"
                             setItemId={setSubjectId}
-                            useSearchHook={(search) => useGetAllSubjects({ search, enable: false })}
+                            useSearchHook={(search) => useGetAllSubjects({ search, enable: true })}
                         />
                     </div>
                     <div className="space-y-2">
@@ -111,7 +111,7 @@ const CreateBookDialog = () => {
                         <AsyncSearchBox
                             placeholder="Select Class"
                             setItemId={setClassId}
-                            useSearchHook={(search) => useGetAllClasses({ search, enable: false })}
+                            useSearchHook={(search) => useGetAllClasses({ search, enable: true })}
                         />
                     </div>
                     <div className="space-y-2">
@@ -119,7 +119,7 @@ const CreateBookDialog = () => {
                         <AsyncSearchBox
                             placeholder="Select Publisher"
                             setItemId={setPublisherId}
-                            useSearchHook={(search) => useGetAllPublishers({ search, enable: false })}
+                            useSearchHook={(search) => useGetAllPublishers({ search, enable: true })}
                         />
 
                     </div>
