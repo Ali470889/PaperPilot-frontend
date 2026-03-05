@@ -29,6 +29,7 @@ import {
 } from "../services/tokenStore/storageHelper";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
 
 export function NavUser() {
   const { isMobile } = useSidebar();
@@ -41,6 +42,15 @@ export function NavUser() {
   return (
     <SidebarMenu>
       <SidebarMenuItem>
+        <Button
+          onClick={() => {
+            navigate("/login");
+            removeFromStorage();
+            queryClient.clear();
+          }}
+        >
+          Logout
+        </Button>
         {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton

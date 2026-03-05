@@ -25,7 +25,12 @@ export function AppSidebar({ ...props }) {
   const decoded = getTokenFromStorage();
   const userRole = decoded?.role
 
-  const filteredProjects = ADMIN_PAGES.filter((item) => PERMISSIONS[userRole]?.includes(item.route));
+  // const filteredProjects = ADMIN_PAGES.filter((item) => PERMISSIONS[userRole]?.includes(item.route));
+
+  const filteredProjects = ADMIN_PAGES.filter(
+    (item) => item.sidebar && PERMISSIONS[userRole]?.includes(item.route)
+  );
+
 
   return (
     <Sidebar collapsible="icon" {...props}>

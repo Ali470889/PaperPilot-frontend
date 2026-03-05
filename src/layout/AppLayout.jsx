@@ -18,6 +18,8 @@ import { useLocation } from "react-router-dom"
 import { Outlet } from 'react-router-dom'
 import { ThemeToggle } from '../components/shared/ThemeToggle'
 import { getPageNameByUrl } from '../routes/ADMIN_ROUTES'
+import { getFromStorage } from "../services/tokenStore/storageHelper"
+import { jwtDecode } from "jwt-decode"
 
 
 const AppLayout = () => {
@@ -25,14 +27,21 @@ const AppLayout = () => {
   const { pathname } = useLocation();
   const pageName = getPageNameByUrl(pathname)
 
+  const token = getFromStorage();
+  if (!token) return null;
+  const decoded = jwtDecode(token?.refreshToken);
+  const role = decoded?.role;
+
 
   return (
     <>
       <SidebarProvider className="overflow-hidden" >
+        {/* {role !== "user" && <AppSidebar />} */}
         <AppSidebar />
         <SidebarInset className="overflow-hidden" >
 
-          <header className="flex justify-between h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+          {/* {role == "user" && <header className="flex justify-between h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12"> */}
+          {true && <header className="flex justify-between h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
             <div className="flex items-center gap-2 px-4">
               <SidebarTrigger className="-ml-1" />
               <Separator
@@ -50,7 +59,7 @@ const AppLayout = () => {
               </Breadcrumb>
             </div>
             <ThemeToggle />
-          </header>
+          </header>}
 
           <div className="flex flex-1 flex-col gap-6 p-4 pt-0 overflow-hidden">
             <Outlet />
