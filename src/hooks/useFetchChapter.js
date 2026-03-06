@@ -51,8 +51,6 @@ export const useCreateChapter = () => {
     return useMutation({
         mutationFn: createChapter,
         onSuccess: () => {
-            toast.success("Chapter created successfully");
-
             // Refetch chapters list
             queryClient.invalidateQueries({ queryKey: ["chapters"] });
         },

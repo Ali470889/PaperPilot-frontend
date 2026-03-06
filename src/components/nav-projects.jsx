@@ -14,7 +14,7 @@ export function NavProjects({
 }) {
   const location = useLocation();
   return (
-    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+    <SidebarGroup >
       <SidebarGroupLabel>Content manage</SidebarGroupLabel>
       <SidebarMenu>
         {projects.map((item) => {
@@ -29,7 +29,7 @@ export function NavProjects({
                     : "text-muted-foreground hover:bg-muted"
                     }`}
                 >
-                  {item.icon ? <item.icon /> : <></>}
+                  {item.icon && <item.icon />}
                   <span>{item.name}</span>
                 </Link>
               </SidebarMenuButton>

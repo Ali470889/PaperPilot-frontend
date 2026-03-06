@@ -1,17 +1,3 @@
-// import React from 'react'
-// import CreateBookDialog from './components/CreateBookDialog'
-
-// const BookPage = () => {
-//     return (
-//         <>
-//             <CreateBookDialog />
-//         </>
-//     )
-// }
-
-// export default BookPage
-
-
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";

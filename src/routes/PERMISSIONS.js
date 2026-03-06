@@ -23,6 +23,8 @@ export const PERMISSIONS = {
         "/paper-generate/select-publisher",
         "/paper-generate/select-publisher/:publisherId/select-class",
         "/paper-generate/select-publisher/:publisherId/select-class/:classId/select-subject",
+        "/paper-generate/select-publisher/:publisherId/select-class/:classId/select-subject/:subjectId/select-book",
+        "/paper-generate/:bookId/generate",
     ],
 
     [ROLES.USER]: [

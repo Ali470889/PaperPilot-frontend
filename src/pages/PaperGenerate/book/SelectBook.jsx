@@ -1,48 +1,51 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Progress } from "@/components/ui/progress";
-import { SearchX } from "lucide-react";
-import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
 
+import { useGetAllBooks } from '../../../hooks/useFetchBook';
+import { useNavigate, useParams } from "react-router-dom";
 import Card from "../../../components/shared/Card";
 import { StateDisplay } from "../../../components/shared/StateDisplay";
-import { useGetFilteredSubjects } from "../../../hooks/useFetchSubject";
+import { SearchX } from "lucide-react";
 import { ADMIN_ROUTE_BUILDERS } from "../../../routes/ADMIN_ROUTES";
 
-const SelectSubject = () => {
+const SelectBook = () => {
 
-    const { publisherId, classId } = useParams();
+    const { publisherId, classId, subjectId } = useParams();
+
     const navigate = useNavigate();
 
     const [inputValue, setInputValue] = useState("");
     const [search, setSearch] = useState("");
+    const [page, setPage] = useState(1);
+    const [size] = useState(10);
 
-    const { data, isLoading, isError, refetch } = useGetFilteredSubjects({
-        classId,
-        publisherId,
+    const { data, isLoading, refetch, isError } = useGetAllBooks({
+        page,
+        size,
         search,
-    });
+        publisherId,
+        classId,
+        subjectId
 
-    console.log("subjects", data);
+    });
 
     const handleSearch = () => {
         setSearch(inputValue.trim());
+        setPage(1); // reset to first page on new search
     };
 
     const handleClear = () => {
         setInputValue("");
         setSearch("");
+        setPage(1);
     };
 
     return (
         <>
-            <Progress value={80} />
-
-            {/* Search Section */}
             <div className="flex flex-col md:flex-row gap-3">
                 <Input
-                    placeholder="Search subject..."
+                    placeholder="Search books..."
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyDown={(e) => {
@@ -56,8 +59,6 @@ const SelectSubject = () => {
                     <SearchX className="text-destructive" />
                 </Button>
             </div>
-
-            {/* Error State */}
             {isError && (
                 <StateDisplay
                     state="error"
@@ -72,19 +73,16 @@ const SelectSubject = () => {
                 <StateDisplay
                     state="loading"
                     title="Loading..."
-                    message="Fetching subjects. Please wait."
+                    message="Fetching classes. Please wait."
                 />
             )}
-
-            {/* Empty State */}
             {data?.items?.length === 0 && (
                 <StateDisplay
                     state="not-found"
-                    title="No Subjects Found"
+                    title="No Classes Found"
                     message="Try adjusting your search or check back later."
                 />
             )}
-
             {/* Data Grid */}
             {!isLoading && !isError && data?.items?.length > 0 && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -95,19 +93,16 @@ const SelectSubject = () => {
                             primaryActionText="Select"
                             onPrimaryClick={() =>
                                 navigate(
-                                    ADMIN_ROUTE_BUILDERS.selectBookByPublisherIdClassIdSubjectId(
-                                        publisherId,
-                                        classId,
-                                        item.id
-                                    )
+                                    ADMIN_ROUTE_BUILDERS.selectDataByBookId(item.id)
                                 )
                             }
                         />
                     ))}
                 </div>
             )}
-        </>
-    );
-};
 
-export default SelectSubject;
+        </>
+    )
+}
+
+export default SelectBook

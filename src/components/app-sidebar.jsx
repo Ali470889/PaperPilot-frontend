@@ -21,6 +21,9 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { ADMIN_PAGES } from "../routes/ADMIN_ROUTES";
 import { PERMISSIONS } from '../routes/PERMISSIONS';
 
+
+
+
 export function AppSidebar({ ...props }) {
   const decoded = getTokenFromStorage();
   const userRole = decoded?.role
@@ -39,6 +42,7 @@ export function AppSidebar({ ...props }) {
       </SidebarHeader>
       <ScrollArea className=" max-h-full min-h-0 rounded-md border">
         <NavProjects projects={filteredProjects} />
+        {/* <NavMain items={data.navMain} /> */}
       </ScrollArea>
       <SidebarFooter>
         <NavUser />

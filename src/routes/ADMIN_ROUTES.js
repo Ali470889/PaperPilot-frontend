@@ -110,12 +110,26 @@ export const ADMIN_PAGES = [
         route: "/paper-generate/select-publisher/:publisherId/select-class/:classId/select-subject",
         sidebar: false
     },
+    {
+        name: "Select Book",
+        icon: null,
+        route: "/paper-generate/select-publisher/:publisherId/select-class/:classId/select-subject/:subjectId/select-book",
+        sidebar: false
+    },
+    {
+        name: "Generate",
+        icon: null,
+        route: "/paper-generate/:bookId/generate",
+        sidebar: false
+    },
 ];
 
 
 export const ADMIN_ROUTE_BUILDERS = {
     selectClassByPublisherId: (publisherId) => `/paper-generate/select-publisher/${publisherId}/select-class`,
-    selectSubjectByClassId: (classId) => `/paper-generate/select-publisher/:publisherId/select-class/${classId}/select-subject`,
+    selectSubjectByClassId: (publisherId, classId) => `/paper-generate/select-publisher/${publisherId}/select-class/${classId}/select-subject`,
+    selectBookByPublisherIdClassIdSubjectId: (publisherId, classId, subjectId) => `/paper-generate/select-publisher/${publisherId}/select-class/${classId}/select-subject/${subjectId}/select-book`,
+    selectDataByBookId: (bookId) => `/paper-generate/${bookId}/generate`,
 };
 
 {/* <ChartBarStacked /> */ }
