@@ -77,3 +77,51 @@ export const useUpdateSubject = () => {
         },
     });
 };
+
+
+
+const getFilteredSubjects = async ({
+    classId,
+    publisherId,
+    page = 1,
+    size = 10,
+    search = "",
+}) => {
+
+    const response = await axiosInstance.get("/subject/filter", {
+        params: {
+            classId,
+            publisherId,
+            page,
+            size,
+            search,
+        },
+    });
+
+    return response.data;
+};
+
+export const useGetFilteredSubjects = ({
+    classId,
+    publisherId,
+    page = 1,
+    size = 10,
+    search = "",
+    enable = true
+}) => {
+
+    return useQuery({
+        queryKey: ["filtered-subjects", classId, publisherId, page, size, search],
+        queryFn: () =>
+            getFilteredSubjects({
+                classId,
+                publisherId,
+                page,
+                size,
+                search,
+            }),
+        keepPreviousData: true,
+        retry: false,
+        enabled: enable && !!(classId || publisherId),
+    });
+};

@@ -117,7 +117,7 @@ const SelectClass = () => {
                             primaryActionText="Select"
                             onPrimaryClick={() =>
                                 navigate(
-                                    ADMIN_ROUTE_BUILDERS.selectSubjectByClassId(item.id)
+                                    ADMIN_ROUTE_BUILDERS.selectSubjectByClassId(publisherId, item.id)
                                 )
                             }
                         />

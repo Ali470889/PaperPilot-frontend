@@ -28,12 +28,15 @@ export const useCreateBook = () => {
     });
 };
 
-const getAllBooks = async ({ page = 1, size = 10, search = "" }) => {
+const getAllBooks = async ({ page = 1, size = 10, search = "", publisherId, classId, subjectId }) => {
     const response = await axiosInstance.get("/book", {
         params: {
             page,
             size,
             search,
+            publisherId,
+            classId,
+            subjectId
         },
     });
     return response.data;
@@ -44,10 +47,13 @@ export const useGetAllBooks = ({
     size = 10,
     search = "",
     enable = true,
+    publisherId,
+    classId,
+    subjectId
 }) => {
     return useQuery({
-        queryKey: ["books", page, size, search],
-        queryFn: () => getAllBooks({ page, size, search }),
+        queryKey: ["books", page, size, search, publisherId, classId, subjectId],
+        queryFn: () => getAllBooks({ page, size, search, publisherId, classId, subjectId }),
         keepPreviousData: true,
         retry: false,
         enabled: enable, // ⚠️ correct key is "enabled", not "enable"
@@ -77,5 +83,20 @@ export const useUpdateBook = () => {
             // Invalidate queries related to books so UI refreshes
             queryClient.invalidateQueries({ queryKey: ["books"] });
         },
+    });
+};
+
+
+const getBookById = async (id) => {
+    const response = await axiosInstance.get(`/book/${id}`);
+    return response.data;
+};
+
+export const useGetBookById = (id, enable = true) => {
+    return useQuery({
+        queryKey: ["book", id],
+        queryFn: () => getBookById(id),
+        enabled: enable && !!id,
+        retry: false,
     });
 };

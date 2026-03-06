@@ -42,7 +42,7 @@ export function NavUser() {
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <Button
+        <SidebarMenuButton
           onClick={() => {
             navigate("/login");
             removeFromStorage();
@@ -50,7 +50,7 @@ export function NavUser() {
           }}
         >
           Logout
-        </Button>
+        </SidebarMenuButton>
         {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton

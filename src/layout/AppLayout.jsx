@@ -15,11 +15,11 @@ import {
 
 import { useLocation } from "react-router-dom"
 
+import { jwtDecode } from "jwt-decode"
 import { Outlet } from 'react-router-dom'
 import { ThemeToggle } from '../components/shared/ThemeToggle'
 import { getPageNameByUrl } from '../routes/ADMIN_ROUTES'
 import { getFromStorage } from "../services/tokenStore/storageHelper"
-import { jwtDecode } from "jwt-decode"
 
 
 const AppLayout = () => {
@@ -35,7 +35,9 @@ const AppLayout = () => {
 
   return (
     <>
-      <SidebarProvider className="overflow-hidden" >
+      <SidebarProvider
+        className="overflow-hidden"
+      >
         {/* {role !== "user" && <AppSidebar />} */}
         <AppSidebar />
         <SidebarInset className="overflow-hidden" >
