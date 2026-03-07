@@ -163,7 +163,7 @@ const GeneratePage = () => {
             chapterName: chapter?.name,
             topicId: topic?.id,
             topicName: topic?.name,
-            text: question?.text?.question ?? question?.question ?? "Untitled question",
+            text: question?.text,
         };
 
         setPaperStructure((prev) =>
@@ -227,7 +227,7 @@ const GeneratePage = () => {
                         )}
 
                         <div className="space-y-3">
-                            {paperStructure.map((section) => {
+                            {paperStructure.map((section, index) => {
                                 const isActive = section.id === activeSectionId;
 
                                 return (
@@ -235,13 +235,13 @@ const GeneratePage = () => {
                                         key={section.id}
                                         onClick={() => setActiveSectionId(section.id)}
                                         className={[
-                                            "p-4 transition cursor-pointer",
+                                            "p-4 transition cursor-pointer flex flex-col gap-4 ",
                                             isActive
                                                 ? "border-primary bg-accent/40 ring-1 ring-primary"
                                                 : "border-border hover:border-primary/40",
                                         ].join(" ")}
                                     >
-                                        <div className="flex flex-col ">
+                                        <div className="flex flex-col gap-4 relative ">
                                             <div className="flex w-full justify-center" >
                                                 <h3 className="font-medium">
                                                     {section.title}
@@ -249,8 +249,12 @@ const GeneratePage = () => {
                                                 </h3>
                                             </div>
 
-                                            <div>
-                                                <p className="flex justify-between" ><span>{section.sectionStatement}</span> <span>{(section.totalQuestions - section.choiceCount) * section.marksPerQuestion}  </span> </p>
+                                            <div className="flex w-full justify-between">
+                                                <div className="flex gap-2">
+                                                    <span> {index + 1}.</span>
+                                                    <span>{section.sectionStatement}</span>
+                                                </div>
+                                                <span>{(section.totalQuestions - section.choiceCount) * section.marksPerQuestion}  </span>
                                             </div>
 
                                             {/* <span className="text-xs text-muted-foreground">
@@ -268,6 +272,7 @@ const GeneratePage = () => {
                                                     e.stopPropagation();
                                                     removeSectionById(section.id);
                                                 }}
+                                                className="w-fit self-end absolute top-0 right-0"
                                             >
                                                 <Trash2Icon className="text-destructive" />
                                             </Button>
