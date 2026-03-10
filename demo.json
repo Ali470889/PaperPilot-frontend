@@ -1,0 +1,20 @@
+{
+    "id": 2,
+    "text": {
+        "question": "What is 2+2?"
+    },
+    "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+    ],
+    "answer": "4",
+    "explanation": "Basic math",
+    "marks": 2,
+    "difficulty": "EASY",
+    "topicId": 2,
+    "questionTypeId": 1,
+    "createdAt": "2026-03-06T11:10:06.191Z",
+    "updatedAt": "2026-03-06T11:10:06.191Z"
+}
