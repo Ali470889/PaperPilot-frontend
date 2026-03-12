@@ -33,6 +33,7 @@ import SelectClass from './pages/PaperGenerate/class/SelectClass'
 import SelectSubject from './pages/PaperGenerate/subject/SelectSubject'
 import SelectBook from './pages/PaperGenerate/book/SelectBook'
 import GeneratePage from './pages/PaperGenerate/generate/GeneratePage'
+import TemplatesPage from './pages/templates/TemplatesPage'
 
 function App() {
   return (
@@ -157,7 +158,17 @@ function App() {
                 }
               />
 
+
             </Route>
+
+            <Route
+              path={"/templatesPage"}
+              element={
+                <ProtectedRoute pageUrl={"/templatesPage"}>
+                  <TemplatesPage />
+                </ProtectedRoute>
+              }
+            />
             <Route path={ADMIN_ROUTES.UNAUTHORIZED} element={<Unauthorized />} />
             <Route path="*" element={<NotFound />} />
           </Route>
