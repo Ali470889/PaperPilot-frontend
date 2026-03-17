@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -7,15 +6,15 @@ import { Input } from "@/components/ui/input";
 import { SearchX } from "lucide-react";
 import { ErrorState } from "../../components/shared/ErrorState";
 import { LoadingState } from "../../components/shared/LoadingState";
-import { useGetAllProvinces } from '../../hooks/useFetchProvince';
-import { ProvinceDataTable } from "./components/ProvinceDataTable";
-import CreateProvinceDialog from "./components/CreateProvinceDialog";
+import { useGetQuestionTypes } from "../../hooks/useFetchQuestionType";
+import CreateQuestionTypeDialog from "./components/CreateQuestionTypeDialog";
+import { QuestionTypeDataTable } from "./components/QuestionTypeDataTable";
 
-const ProvincePage = () => {
+const QuestionTypePage = () => {
     const [inputValue, setInputValue] = useState("");
     const [search, setSearch] = useState(null);
 
-    const { data, isLoading, refetch, isError } = useGetAllProvinces({
+    const { data, isLoading, refetch, isError } = useGetQuestionTypes({
         page: 1,
         size: 10,
         search,
@@ -30,13 +29,15 @@ const ProvincePage = () => {
         setSearch(null);
     };
 
+    const questionTypes = data?.questionTypes || data?.items || [];
+
     return (
         <>
-            <CreateProvinceDialog />
-            {/* Search Section */}
+            <CreateQuestionTypeDialog />
+
             <div className="flex flex-col md:flex-row gap-3">
                 <Input
-                    placeholder="Search province..."
+                    placeholder="Search question type..."
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyDown={(e) => {
@@ -51,26 +52,18 @@ const ProvincePage = () => {
                 </Button>
             </div>
 
-            {/* Loading */}
-            {isLoading && (
-                <LoadingState name={"provinces"} />
-            )}
+            {isLoading && <LoadingState name={"question types"} />}
 
-            {/* Error */}
             {isError && (
                 <ErrorState
                     onRetry={refetch}
-                    message={"Failed to fetch provinces"}
+                    message={"Failed to fetch question types"}
                 />
             )}
 
-            {/* Table */}
-            {!isLoading && <ProvinceDataTable data={data?.provinces} />}
-
+            {!isLoading && !isError && <QuestionTypeDataTable data={questionTypes} />}
         </>
-    )
-}
+    );
+};
 
-export default ProvincePage
-
-
+export default QuestionTypePage;
