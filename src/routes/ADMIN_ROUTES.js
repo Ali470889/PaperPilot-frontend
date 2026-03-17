@@ -68,6 +68,18 @@ export const ADMIN_PAGES = [
         sidebar: true
     },
     {
+        name: "Question Type",
+        icon: BadgeQuestionMark,
+        route: "/question-type",
+        sidebar: true
+    },
+    {
+        name: "Question",
+        icon: BadgeQuestionMark,
+        route: "/question",
+        sidebar: true
+    },
+    {
         name: "Login",
         icon: null,
         route: "/login",
