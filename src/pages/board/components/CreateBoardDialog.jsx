@@ -31,7 +31,6 @@ const CreateBoardDialog = () => {
         name: "",
         acronym: "",
         provinceId: "",
-        city: "",
         hasMetric: true,
         hasInter: true,
     });
@@ -63,7 +62,6 @@ const CreateBoardDialog = () => {
             name: form.name,
             acronym: form.acronym,
             provinceId: Number(form.provinceId),
-            city: form.city,
             hasMetric: form.hasMetric,
             hasInter: form.hasInter,
         }, {
@@ -73,7 +71,6 @@ const CreateBoardDialog = () => {
                     name: "",
                     acronym: "",
                     provinceId: "",
-                    city: "",
                     hasMetric: true,
                     hasInter: true,
                 });
@@ -152,17 +149,6 @@ const CreateBoardDialog = () => {
                                 ))}
                             </SelectContent>
                         </Select>
-                    </div>
-
-
-                    <div className="grid gap-2">
-                        <Label htmlFor="city">City</Label>
-                        <Input
-                            id="city"
-                            placeholder="e.g. Lahore"
-                            value={form.city}
-                            onChange={onChange("city")}
-                        />
                     </div>
 
                     <div className="flex items-center gap-3">
