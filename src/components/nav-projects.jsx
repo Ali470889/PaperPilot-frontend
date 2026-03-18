@@ -17,10 +17,10 @@ export function NavProjects({
     <SidebarGroup >
       <SidebarGroupLabel>Content manage</SidebarGroupLabel>
       <SidebarMenu>
-        {projects.map((item) => {
+        {projects.map((item, index) => {
           const isActive = location.pathname === item.route;
           return (
-            <SidebarMenuItem key={item.name}>
+            <SidebarMenuItem key={index}>
               <SidebarMenuButton asChild>
                 <Link
                   to={item.route}

@@ -9,7 +9,7 @@ import {
     Shapes,
     BookCheck,
     Book,
-
+    InspectionPanel,
 } from "lucide-react";
 
 export const ADMIN_PAGES = [
@@ -23,12 +23,6 @@ export const ADMIN_PAGES = [
         name: "Board",
         icon: SquareDashedTopSolid,
         route: "/board",
-        sidebar: true
-    },
-    {
-        name: "Question",
-        icon: BadgeQuestionMark,
-        route: "/question",
         sidebar: true
     },
     {
@@ -65,6 +59,12 @@ export const ADMIN_PAGES = [
         name: "Topic",
         icon: FileText,
         route: "/topic",
+        sidebar: true
+    },
+    {
+        name: "Section",
+        icon: InspectionPanel,
+        route: "/section",
         sidebar: true
     },
     {

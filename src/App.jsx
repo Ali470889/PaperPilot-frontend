@@ -36,6 +36,7 @@ import GeneratePage from './pages/PaperGenerate/generate/GeneratePage'
 import TemplatesPage from './pages/templates/TemplatesPage'
 import QuestionTypePage from './pages/questionType/QuestionTypePage'
 import QuestionPage from './pages/question/QuestionPage'
+import SectionPage from './pages/section/SectionPage'
 
 function App() {
   return (
@@ -113,6 +114,14 @@ function App() {
               element={
                 <ProtectedRoute pageUrl={ADMIN_ROUTES.TOPIC}>
                   <TopicPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={ADMIN_ROUTES.SECTION}
+              element={
+                <ProtectedRoute pageUrl={ADMIN_ROUTES.SECTION}>
+                  <SectionPage />
                 </ProtectedRoute>
               }
             />
