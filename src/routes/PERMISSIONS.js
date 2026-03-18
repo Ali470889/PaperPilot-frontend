@@ -19,6 +19,7 @@ export const PERMISSIONS = {
         "/publisher",
         "/book",
         "/topic",
+        "/section",
         "/question-type",
         "/question",
         "/paper-generate",
